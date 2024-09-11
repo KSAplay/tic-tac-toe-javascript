@@ -29,9 +29,7 @@ const WINNING_COMBINATIONS = [
   [2, 4, 6], // Diagonal secundaria
 ];
 
-let turn = 0;
-let playerOne = 0;
-let playerTwo = 1;
+let turn, turnAI, playerOne, playerTwo;
 let board = [
   [-1, -1, -1],
   [-1, -1, -1],
@@ -46,29 +44,43 @@ function startGame() {
 }
 
 function resetGame() {
-  // 1. Reiniciar el tablero.
+  // Habilitar las casillas
+  toggleSquares(true);
+  // Reiniciar el tablero.
   board = [
     [-1, -1, -1],
     [-1, -1, -1],
     [-1, -1, -1],
   ];
-  // 2. Reinicia la lista de casillas usadas.
+  // Reinicia la lista de casillas usadas.
   squaresUsed = [];
-  // 3. Limpiar visualmente el tablero.
-  cleanBoard();
-  // 4. Seleccionar un turno.
-  turn = selectTurn();
-  // 5. Cierra el dialogo si está abierto.
-  dialog.close();
-  // 6. Establecer un turno para el jugador 1 y 2.
-  playerOne = turn;
-  playerTwo = turn == 0 ? 1 : 0;
-  // Reestablecer si existe ganador a falso
+  // Establece que no hay ganador
   winnerExists = false;
-}
+  // Limpiar visualmente el tablero.
+  cleanBoard();
+  // Seleccionar un turno.
+  turn = selectTurn();
+  turnAI = selectTurn();
 
-function selectTurn() {
-  return Math.round(Math.random(1));
+  // Si la IA comienza, realiza su movimiento.
+  if (turnAI == turn) {
+    // Establecer que la AI es el jugador 1
+    playerOne = turn;
+    playerTwo = 1 - turn;
+    // Inhabilitamos las casillas
+    toggleSquares(false);
+    playerAI(); // Movimiento de IA
+    setTimeout(() => {
+      toggleSquares(true);
+    }, 500);
+  } else {
+    // Establecer que la AI es el jugador 2
+    playerOne = 1 - turn;
+    playerTwo = turn;
+  }
+
+  // Cerrar el diálogo si está abierto.
+  dialog.close();
 }
 
 function handleSquareClick(squareId) {
@@ -78,25 +90,23 @@ function handleSquareClick(squareId) {
     draw(squareId);
     // Actualizar el tablero con el turno.
     updateBoard(squareId, turn);
-    // Cambiar el turno a la siguiente persona ("x" a "o" o "o" a "x").
-    turn = turn == 1 ? 0 : 1;
+    // Cambiar el turno.
+    turn = 1 - turn;
     // Verificar si hay un ganador o es empate.
     const gameEnded = checkWinner();
     // Solo la IA hace su movimiento si el juego no ha terminado y el turno actual es el de la IA.
-    if (!gameEnded && turn === playerTwo) {
-      // Inhabilitar el turno del jugador uno
-      document.querySelectorAll(".square").forEach((square) => {
-        square.classList.add("disabled");
-      });
-      // Esperar un pequeño delay para simular la respuesta de la IA.
+    if (!gameEnded && turn === turnAI) {
+      toggleSquares(false);
       setTimeout(() => {
         playerAI();
-        document.querySelectorAll(".square").forEach((square) => {
-          square.classList.remove("disabled");
-        });
+        toggleSquares(true);
       }, 500);
     }
   }
+}
+
+function selectTurn() {
+  return Math.round(Math.random());
 }
 
 function draw(squareId) {
@@ -172,4 +182,10 @@ function playerAI() {
     // Realizar el movimiento llamando a handleSquareClick.
     handleSquareClick(aiMove);
   }
+}
+
+function toggleSquares(enable) {
+  document.querySelectorAll(".square").forEach((square) => {
+    square.classList.toggle("disabled", !enable);
+  });
 }
