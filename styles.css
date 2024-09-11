@@ -4,15 +4,27 @@
 }
 
 body {
+  position: relative;
   display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: center;
   height: 100vh;
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  background: rgb(22, 22, 22);
+  background-color: rgb(22, 22, 22);
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
 }
 
 header {
@@ -132,6 +144,108 @@ header {
   filter: drop-shadow(0 0 2px rgb(180, 180, 180))
     drop-shadow(0 0 5px rgb(180, 180, 180))
     drop-shadow(0 0 8px rgb(180, 180, 180));
+}
+
+.dialog {
+  position: absolute;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.2);
+  transition: 100ms ease;
+  animation: entrance 100ms ease both;
+}
+
+.dialog .background-message {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 360px;
+  height: 360px;
+  background-color: rgb(22, 22, 22);
+  border-radius: 25px;
+  overflow: hidden;
+}
+
+.dialog .animated-squares {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+.blue-side,
+.pink-side {
+  position: absolute;
+  flex-direction: column;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 200px;
+  height: 150%;
+  animation: turn 2.5s linear infinite both;
+}
+
+.blue-side div,
+.pink-side div {
+  width: 50%;
+  height: 100%;
+}
+
+.blue-side div:nth-child(1) {
+  background: #2f76ff;
+  background: linear-gradient(
+    90deg,
+    #2f76ff 0%,
+    rgb(185, 208, 255) 50%,
+    #2f76ff 100%
+  );
+  filter: drop-shadow(0 0 5px #2f76ff) drop-shadow(0 0 10px #2f76ff)
+    drop-shadow(0 0 15px #2f76ff) drop-shadow(0 0 20px #2f76ff)
+    drop-shadow(0 0 25px #2f76ff) drop-shadow(0 0 30px #2f76ff);
+}
+
+.pink-side div:nth-child(2) {
+  background: rgb(204, 32, 108);
+  background: linear-gradient(
+    90deg,
+    rgba(204, 32, 108, 1) 0%,
+    rgb(250, 186, 215) 50%,
+    rgba(204, 32, 108, 1) 100%
+  );
+  filter: drop-shadow(0 0 5px #cc206c) drop-shadow(0 0 10px #cc206c)
+    drop-shadow(0 0 15px #cc206c) drop-shadow(0 0 20px #cc206c)
+    drop-shadow(0 0 25px #cc206c) drop-shadow(0 0 30px #cc206c);
+}
+.dialog .message {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  font-size: 16pt;
+  text-transform: uppercase;
+  font-weight: 700;
+  width: 345px;
+  height: 345px;
+  border-radius: 15px;
+  background-color: rgb(22, 22, 22);
+  color: white;
+  z-index: 2;
+}
+
+@keyframes turn {
+  0% {
+    rotate: 0deg;
+  }
+  100% {
+    rotate: 360deg;
+  }
 }
 
 @keyframes entrance {

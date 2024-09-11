@@ -1,5 +1,5 @@
-document.querySelector(".btn-reset").addEventListener("click", resetGame);
-const dialog = document.querySelector(".message");
+const DIALOG = document.querySelector(".dialog");
+const BUTTONS_SECTION = document.querySelector(".buttons-section");
 
 window.addEventListener("load", startGame);
 
@@ -15,6 +15,8 @@ const O_HTML = `
     <div class="circle"></div>
   </div>`;
 const O_SQUARE_COLOR = "rgb(96, 6, 46)";
+
+const RESET_BUTTON = `<input class="btn-reset" type="button" value="Reiniciar" onclick="resetGame()"/>`;
 
 const SQUARE_EXIT_ANIMATION_DURATION = 200;
 
@@ -80,7 +82,8 @@ function resetGame() {
   }
 
   // Cerrar el diálogo si está abierto.
-  dialog.close();
+  DIALOG.style.display = "none";
+  BUTTONS_SECTION.style.visibility = "visible";
 }
 
 function handleSquareClick(squareId) {
@@ -138,12 +141,18 @@ function checkWinner() {
   });
 
   if (winnerExists) {
-    dialog.innerHTML = `¡Ganador: ${winnerCheck == 1 ? "X" : "O"}!`;
-    dialog.showModal();
+    DIALOG.querySelector(".message").innerHTML = `<div>¡Ganador: ${
+      winnerCheck == 1 ? "X" : "O"
+    }!</div>${RESET_BUTTON}`;
+    BUTTONS_SECTION.style.visibility = "hidden";
+    DIALOG.style.display = "flex";
     return true;
   } else if (squaresUsed.length >= 9) {
-    dialog.innerHTML = `¡Empate!`;
-    dialog.showModal();
+    DIALOG.querySelector(
+      ".message"
+    ).innerHTML = `<div>¡Empate!</div>${RESET_BUTTON}`;
+    BUTTONS_SECTION.style.visibility = "hidden";
+    DIALOG.style.display = "flex";
     return true;
   }
 
