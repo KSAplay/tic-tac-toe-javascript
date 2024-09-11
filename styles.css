@@ -64,6 +64,10 @@ main {
   background-color: rgba(255, 255, 255, 0.1);
 }
 
+.disabled {
+  pointer-events: none;
+}
+
 .x,
 .o {
   position: relative;
@@ -132,7 +136,7 @@ main {
 }
 
 .btn-reset:active {
-  translate: 0 5px;
+  translate: 0 0px;
   filter: drop-shadow(0 0 2px rgb(180, 180, 180))
     drop-shadow(0 0 5px rgb(180, 180, 180))
     drop-shadow(0 0 8px rgb(180, 180, 180));

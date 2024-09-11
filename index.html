@@ -12,21 +12,21 @@
     </header>
     <main>
       <section class="game-section">
-        <div id="square-1" class="square" onclick="draw(1)"></div>
-        <div id="square-2" class="square" onclick="draw(2)"></div>
-        <div id="square-3" class="square" onclick="draw(3)"></div>
-        <div id="square-4" class="square" onclick="draw(4)"></div>
-        <div id="square-5" class="square" onclick="draw(5)"></div>
-        <div id="square-6" class="square" onclick="draw(6)"></div>
-        <div id="square-7" class="square" onclick="draw(7)"></div>
-        <div id="square-8" class="square" onclick="draw(8)"></div>
-        <div id="square-9" class="square" onclick="draw(9)"></div>
+        <div id="square-1" class="square" onclick="handleSquareClick(1)"></div>
+        <div id="square-2" class="square" onclick="handleSquareClick(2)"></div>
+        <div id="square-3" class="square" onclick="handleSquareClick(3)"></div>
+        <div id="square-4" class="square" onclick="handleSquareClick(4)"></div>
+        <div id="square-5" class="square" onclick="handleSquareClick(5)"></div>
+        <div id="square-6" class="square" onclick="handleSquareClick(6)"></div>
+        <div id="square-7" class="square" onclick="handleSquareClick(7)"></div>
+        <div id="square-8" class="square" onclick="handleSquareClick(8)"></div>
+        <div id="square-9" class="square" onclick="handleSquareClick(9)"></div>
       </section>
       <section class="buttons-section">
         <input class="btn-reset" type="button" value="Reiniciar" />
       </section>
-      <dialog class="message">Ganaste!</dialog>
     </main>
+    <dialog class="message"></dialog>
     <script src="script.js"></script>
   </body>
 </html>
