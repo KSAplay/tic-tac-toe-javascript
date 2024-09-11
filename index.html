@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
+    <title>Tic Tac Toe</title>
+  </head>
+  <body>
+    <header>
+      <h1 class="title">TIC TAC TOE</h1>
+    </header>
+    <main>
+      <section class="game-section">
+        <div id="square-1" class="square" onclick="draw(1)"></div>
+        <div id="square-2" class="square" onclick="draw(2)"></div>
+        <div id="square-3" class="square" onclick="draw(3)"></div>
+        <div id="square-4" class="square" onclick="draw(4)"></div>
+        <div id="square-5" class="square" onclick="draw(5)"></div>
+        <div id="square-6" class="square" onclick="draw(6)"></div>
+        <div id="square-7" class="square" onclick="draw(7)"></div>
+        <div id="square-8" class="square" onclick="draw(8)"></div>
+        <div id="square-9" class="square" onclick="draw(9)"></div>
+      </section>
+      <section class="buttons-section">
+        <input class="btn-reset" type="button" value="Reiniciar" />
+      </section>
+      <dialog class="message">Ganaste!</dialog>
+    </main>
+    <script src="script.js"></script>
+  </body>
+</html>
